@@ -3,6 +3,34 @@ import { useState } from "react";
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mwpodldw", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setError(false);
+        form.reset();
+      } else {
+        setError(true);
+      }
+    } catch (err) {
+      setError(true);
+    }
+  }
 
   return (
     <section id="kontakt" className="w-full bg-white py-20 px-6">
@@ -17,12 +45,7 @@ export default function ContactSection() {
             Vielen Dank! Deine Nachricht wurde erfolgreich versendet.
           </div>
         ) : (
-          <form
-            action="https://formspree.io/f/mwpodldw"
-            method="POST"
-            onSubmit={() => setSubmitted(true)}
-            className="space-y-4 text-left"
-          >
+          <form onSubmit={handleSubmit} className="space-y-4 text-left">
             <input
               type="text"
               name="name"
@@ -50,17 +73,21 @@ export default function ContactSection() {
             >
               Nachricht senden
             </button>
+            {error && (
+              <p className="text-red-600 mt-2 text-center">
+                Leider ist ein Fehler aufgetreten. Bitte versuche es erneut.
+              </p>
+            )}
           </form>
         )}
 
-	<p className="mt-8 text-gray-700 text-center">
- 	  📞 Alternativ kannst du mich direkt unter{" "}
- 	  <a href="tel:+491629087741" className="text-blue-600">
-   	    +49 162 9087741
- 	  </a>{" "}
- 	  erreichen – sollte ich nicht direkt abnehmen, werde ich schnellstmöglich zurückrufen.
-	</p>
-
+        <p className="mt-8 text-gray-700 text-center">
+          📞 Alternativ kannst du mich direkt unter{" "}
+          <a href="tel:+491629087741" className="text-blue-600">
+            +49 162 9087741
+          </a>{" "}
+          erreichen – sollte ich nicht direkt abnehmen, werde ich schnellstmöglich zurückrufen.
+        </p>
       </div>
     </section>
   );
