@@ -1,4 +1,9 @@
-export default function Contact() {
+"use client";
+import { useState } from "react";
+
+export default function ContactSection() {
+  const [submitted, setSubmitted] = useState(false);
+
   return (
     <section id="kontakt" className="w-full bg-white py-20 px-6">
       <div className="max-w-3xl mx-auto text-center">
@@ -6,42 +11,57 @@ export default function Contact() {
         <p className="text-gray-700 mb-8">
           Du hast Interesse oder Fragen? Schreib mir eine Nachricht – ich melde mich zeitnah zurück.
         </p>
-        <form
-          action="mailto:deine@email.de"
-          method="POST"
-          encType="text/plain"
-          className="space-y-4 text-left"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Dein Name"
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Deine E-Mail"
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-          />
-          <textarea
-            name="nachricht"
-            placeholder="Deine Nachricht"
-            rows={5}
-            required
-            className="w-full px-4 py-2 border border-gray-300 rounded"
-          ></textarea>
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+
+        {submitted ? (
+          <div className="bg-green-100 border border-green-400 text-green-800 p-4 rounded">
+            Vielen Dank! Deine Nachricht wurde erfolgreich versendet.
+          </div>
+        ) : (
+          <form
+            action="https://formspree.io/f/mwpodldw"
+            method="POST"
+            onSubmit={() => setSubmitted(true)}
+            className="space-y-4 text-left"
           >
-            Nachricht senden
-          </button>
-        </form>
+            <input
+              type="text"
+              name="name"
+              placeholder="Dein Name"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Deine E-Mail"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded"
+            />
+            <textarea
+              name="message"
+              placeholder="Deine Nachricht"
+              rows={5}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded"
+            ></textarea>
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+            >
+              Nachricht senden
+            </button>
+          </form>
+        )}
+
+        <p className="mt-8 text-gray-700">
+          📞 Alternativ kannst du mich auch direkt anrufen unter:{" "}
+          <a href="tel:+491629087741" className="text-blue-600 underline">
+            +49 162 9087741
+          </a>{" "}
+          – falls ich nicht direkt rangehe, melde ich mich zeitnah zurück.
+        </p>
       </div>
     </section>
-  )
+  );
 }
 
