@@ -13,7 +13,7 @@ export default function Datenschutz() {
         </p>
 
         <p className="mb-4">
-          Wenn du mir per E-Mail an hello@docalyze.de schreibst, speichere ich
+          Wenn du mir per E-Mail an hello@docalyze-solutions.de schreibst, speichere ich
           deine Angaben nur zum Zweck der Bearbeitung deiner Anfrage. Eine Weitergabe
           an Dritte erfolgt nicht.
         </p>
@@ -24,7 +24,7 @@ export default function Datenschutz() {
         </p>
 
         <p className="mb-4">
-          Verantwortlich für den Datenschutz: Lukas Scholl – hello@docalyze.de
+          Verantwortlich für den Datenschutz: Lukas Scholl – hello@docalyze-solutions.de
         </p>
 
         <p className="text-sm text-gray-500">
