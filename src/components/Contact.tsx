@@ -46,20 +46,21 @@ export default function ContactSection() {
             ></textarea>
             <button
               type="submit"
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+              className="block mx-auto bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
             >
               Nachricht senden
             </button>
           </form>
         )}
 
-        <p className="mt-8 text-gray-700">
-          📞 Alternativ kannst du mich auch direkt anrufen unter:{" "}
-          <a href="tel:+491629087741" className="text-blue-600 underline">
-            +49 162 9087741
-          </a>{" "}
-          – falls ich nicht direkt rangehe, melde ich mich zeitnah zurück.
-        </p>
+	<p className="mt-8 text-gray-700 text-center">
+ 	  📞 Alternativ kannst du mich direkt unter{" "}
+ 	  <a href="tel:+491629087741" className="text-blue-600 underline">
+   	    +49 162 9087741
+ 	  </a>{" "}
+ 	  erreichen – sollte ich nicht direkt abnehmen, werde ich schnellstmöglich zurückrufen.
+	</p>
+
       </div>
     </section>
   );
