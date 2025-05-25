@@ -55,7 +55,7 @@ export default function ContactSection() {
 
 	<p className="mt-8 text-gray-700 text-center">
  	  📞 Alternativ kannst du mich direkt unter{" "}
- 	  <a href="tel:+491629087741" className="text-blue-600 underline">
+ 	  <a href="tel:+491629087741" className="text-blue-600">
    	    +49 162 9087741
  	  </a>{" "}
  	  erreichen – sollte ich nicht direkt abnehmen, werde ich schnellstmöglich zurückrufen.
