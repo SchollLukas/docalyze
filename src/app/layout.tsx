@@ -1,44 +1,65 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer"; // ✅ hier kommt der Import dazu
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import localFont from "next/font/local";
+import { Inter, Manrope } from "next/font/google";
+
+const manrope = Manrope({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const aileron = localFont({
+  src: [
+    { path: "../fonts/Aileron-Black.woff2", weight: "1000", style: "normal" },
+  ],
+  variable: "--font-aileron",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Docalyze – Struktur schafft Vertrauen",
   description:
-    "Bilanzanalyse & buchhalterische Unterstützung für kleine und mittelständische Unternehmen. Klar. Verlässlich. Effektiv.",
+    "Bankfähige Unterlagen, klare Analysen und prüfungssichere Strukturen für Unternehmer, Projektentwickler und Bauträger.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="de">
-      <head>
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        {/* Optional weitere Meta-Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={[
+          manrope.variable,
+          inter.variable,
+          aileron.variable,
+          "antialiased",
+          "bg-[var(--bg)]",
+          "text-[var(--text)]",
+        ].join(" ")}
       >
+        {/* Navbar global */}
+        <Navbar />
+
+        {/* Page content */}
         {children}
-        <Footer /> {/* ✅ Footer wird hier eingebunden */}
+
+        {/* Globaler Footer */}
+        <Footer />
       </body>
     </html>
   );
 }
-
