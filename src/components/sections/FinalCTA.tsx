@@ -44,7 +44,7 @@ export default function FinalCTA() {
         {/* Rechte Seite: Logo – bewusst zentriert */}
         <div className="flex w-full md:w-[320px] justify-center md:pl-20">
           <Image
-            src="/logo helleschrift.png"
+            src="/Logo helleschrift.png"
             alt="Docalyze Solutions Logo"
             width={220}
             height={220}

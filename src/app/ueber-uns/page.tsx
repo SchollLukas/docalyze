@@ -127,7 +127,7 @@ export default function UeberUnsPage() {
             <Reveal direction="right" duration={0.62} x={12} amount={0.25} className="h-full w-full">
               <div className="relative h-full w-full">
                 <Image
-                  src="/Scholl_9542.jpg"
+                  src="/Scholl_9542.JPG"
                   alt="Lukas Scholl"
                   width={900}
                   height={1100}
