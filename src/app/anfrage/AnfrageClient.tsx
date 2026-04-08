@@ -11,7 +11,6 @@ type ServiceOption = {
   label: string;
   group: "retainer" | "entwicklung" | "unternehmen";
   description: string;
-  honorar: string;
 };
 
 const SERVICE_OPTIONS: ServiceOption[] = [
@@ -21,7 +20,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "retainer",
     description:
       "Von der ersten Aufbereitung bis zum laufenden Reporting. Bündelung von Analyse, Abstimmungen und Reporting in einem Mandat.",
-    honorar: "ab 3.000 € / Monat",
   },
   {
     id: "projektkalkulationen",
@@ -29,7 +27,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "entwicklung",
     description:
       "Bankfähige Kalkulation mit realistischen Annahmen, Puffern und Kapitaldienstlogik. Planung der Zahlungsströme.",
-    honorar: "ab 4.500 €",
   },
   {
     id: "projektanalyse",
@@ -37,7 +34,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "entwicklung",
     description:
       "Einordnung, ob Projektstruktur, Risiko und Vorverkaufsquote eine vertretbare Finanzierung zulassen. Kapitalbeschaffung auf Wunsch.",
-    honorar: "ab 3.300 €",
   },
   {
     id: "risiko-sensitivitaet",
@@ -45,14 +41,12 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "entwicklung",
     description:
       "Szenarien zu Kosten, Erlösen, Zeit und Zins mit Auswirkungen auf Ergebnis und Kapitaldienstfähigkeit.",
-    honorar: "ab 3.500 €",
   },
   {
     id: "projektmonitoring",
     label: "Monitoring",
     group: "entwicklung",
     description: "Laufende bankreife Berichte zu Bautenstand, Kosten und Liquidität.",
-    honorar: "ab 1.750 € / Monat",
   },
   {
     id: "unternehmensanalyse",
@@ -60,7 +54,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "unternehmen",
     description:
       "Klarheit über wirtschaftliche Lage, Risiken und die nächsten sinnvollen Schritte.",
-    honorar: "ab 3.000 €",
   },
   {
     id: "unterlagen",
@@ -68,7 +61,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "unternehmen",
     description:
       "Nachvollziehbare Aufbereitung Ihrer Zahlen mit Fokus auf Finanzierungsfähigkeit. Auf Wunsch begleiten wir Sie bei der Kapitalbeschaffung.",
-    honorar: "ab 3.500 €",
   },
   {
     id: "pruefungsbericht",
@@ -76,7 +68,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "unternehmen",
     description:
       "Konkrete Ableitung und Umsetzung der im Prüfungsbericht benannten Feststellungen. Grundlage für eine stabile Zukunft.",
-    honorar: "ab 2.500 €",
   },
   {
     id: "prozesse",
@@ -84,7 +75,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "unternehmen",
     description:
       "Integration und Optimierung. Abläufe, die liefern – lösungsorientiert und umsetzbar gestaltet.",
-    honorar: "ab 4.000 €",
   },
   {
     id: "buchhaltung-controlling",
@@ -92,7 +82,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "unternehmen",
     description:
       "Einführung von Strukturen, damit Sie Ihr Unternehmen aktiv steuern können – intern wie extern.",
-    honorar: "ab 3.500 €",
   },
   {
     id: "kmu-reporting",
@@ -100,7 +89,6 @@ const SERVICE_OPTIONS: ServiceOption[] = [
     group: "unternehmen",
     description:
       "Laufendes Reporting zu Liquidität, Ergebnis und wesentlichen Kennzahlen. Abweichungen werden eingeordnet – ohne zusätzlichen internen Aufwand.",
-    honorar: "ab 1.500 € / Monat",
   },
 ];
 
@@ -113,9 +101,9 @@ export default function AnfrageClient() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const zielgruppe = searchParams.get("zielgruppe"); // "entwicklung" | "unternehmen" | null
+  const zielgruppe = searchParams.get("zielgruppe");
   const vorwahlLeistung = searchParams.get("leistung");
-  const vorwahlModell = searchParams.get("modell"); // "retainer" etc.
+  const vorwahlModell = searchParams.get("modell");
 
   useEffect(() => {
     const initial: string[] = [];
@@ -213,24 +201,13 @@ export default function AnfrageClient() {
             )}
           </div>
 
-          <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-            <div className="min-w-0">
-              <p className="text-sm sm:text-[15px] font-semibold text-white">
-                {opt.label}
-              </p>
-              <p className="text-xs sm:text-sm text-[var(--muted)] mt-1">
-                {opt.description}
-              </p>
-            </div>
-
-            <div className="sm:self-center sm:text-right shrink-0 sm:min-w-[170px] pt-0.5">
-              <p className="text-[8px] uppercase tracking-wide text-[var(--muted)]">
-                Honorar
-              </p>
-              <p className="text-sm sm:text-base font-semibold text-white leading-tight mt-1">
-                {opt.honorar}
-              </p>
-            </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm sm:text-[15px] font-semibold text-white">
+              {opt.label}
+            </p>
+            <p className="text-xs sm:text-sm text-[var(--muted)] mt-1">
+              {opt.description}
+            </p>
           </div>
         </div>
       </button>
@@ -380,12 +357,7 @@ export default function AnfrageClient() {
                     {selectedOptions.map((opt) => (
                       <li key={opt.id} className="flex items-start gap-2">
                         <span className="mt-[3px] h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                        <span className="text-white/90">
-                          {opt.label}{" "}
-                          <span className="text-[var(--muted)]">
-                            ({opt.honorar})
-                          </span>
-                        </span>
+                        <span className="text-white/90">{opt.label}</span>
                       </li>
                     ))}
                   </ul>

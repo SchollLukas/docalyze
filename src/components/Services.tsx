@@ -17,7 +17,6 @@ type ServiceRow = {
   anchorId: string;
   title: string;
   description: string;
-  honorar?: string;
 };
 
 const peRows: ServiceRow[] = [
@@ -26,28 +25,24 @@ const peRows: ServiceRow[] = [
     title: "Projektkalkulation",
     description:
       "Bankfähige Kalkulation mit realistischen Annahmen, Puffern und Kapitaldienstlogik. Planung der Zahlungsströme.",
-    honorar: "ab 4.500 €",
   },
   {
     anchorId: "projektanalyse",
     title: "Projektanalyse",
     description:
       "Einordnung, ob Projektstruktur, Risiko und Vorverkaufsquote eine vertretbare Finanzierung zulassen. Kapitalbeschaffung auf Wunsch.",
-    honorar: "ab 3.300 €",
   },
   {
     anchorId: "risiko-sensitivitaet",
     title: "Risiko- & Sensitivitätsanalyse",
     description:
       "Szenarien zu Kosten, Erlösen, Zeit und Zins mit Auswirkungen auf Ergebnis und Kapitaldienstfähigkeit.",
-    honorar: "ab 3.500 €",
   },
   {
     anchorId: "projektmonitoring",
     title: "Monitoring",
     description:
       "Laufende bankreife Berichte zu Bautenstand, Kosten und Liquidität.",
-    honorar: "ab 1.750 € / Monat",
   },
 ];
 
@@ -57,42 +52,36 @@ const kmuRows: ServiceRow[] = [
     title: "Unternehmensanalyse",
     description:
       "Klarheit über wirtschaftliche Lage, Risiken und die nächsten sinnvollen Schritte.",
-    honorar: "ab 3.000 €",
   },
   {
     anchorId: "unterlagen",
     title: "Unterlagenaufbereitung",
     description:
       "Nachvollziehbare Aufbereitung Ihrer Zahlen mit Fokus auf Finanzierungsfähigkeit. Auf Wunsch begleiten wir Sie bei der Kapitalbeschaffung.",
-    honorar: "ab 3.500 €",
   },
   {
     anchorId: "pruefungsbericht",
     title: "Umsetzung Prüfungsbericht",
     description:
       "Konkrete Ableitung und Umsetzung der im Prüfungsbericht benannten Feststellungen. Wir schaffen gemeinsam die Grundlage für eine stabile Zukunft.",
-    honorar: "ab 2.500 €",
   },
   {
     anchorId: "prozesse",
     title: "Prozesse",
     description:
       "Integration und Optimierung. Abläufe, die liefern. Wir gestalten gemeinsam lösungsorientiert Ihre Prozesse.",
-    honorar: "ab 4.000 €",
   },
   {
     anchorId: "buchhaltung-controlling",
     title: "Buchhaltungs- und Controllingstruktur",
     description:
       "Einführung von Strukturen, damit Sie Ihr Unternehmen aktiv steuern können – intern wie extern.",
-    honorar: "ab 3.500 €",
   },
   {
     anchorId: "kmu-reporting",
     title: "Reporting",
     description:
       "Laufendes Reporting zu Liquidität, Ergebnis und wesentlichen Kennzahlen. Abweichungen werden eingeordnet – für Transparenz ohne zusätzlichen internen Aufwand.",
-    honorar: "ab 1.500 € / Monat",
   },
 ];
 
@@ -122,11 +111,11 @@ function useHasScrolled() {
 type RevealProps = {
   className?: string;
   children: React.ReactNode;
-  y?: number; // 8–16
-  x?: number; // 8–16
+  y?: number;
+  x?: number;
   direction?: "up" | "left" | "right";
-  duration?: number; // 0.55–0.65 / headings 0.5–0.6
-  delay?: number; // keep tiny
+  duration?: number;
+  delay?: number;
   amount?: number;
 };
 
@@ -146,8 +135,7 @@ function Reveal({
   const ref = React.useRef<HTMLDivElement | null>(null);
   const inView = useInView(ref, {
     amount,
-    once: false, // reverse
-    // weniger aggressiv als zuvor → stabileres InView
+    once: false,
     margin: "0px 0px -5% 0px",
   });
 
@@ -163,10 +151,6 @@ function Reveal({
 
   const show = { opacity: 1, x: 0, y: 0 };
 
-  // ✅ Key fix:
-  // - initial stays "hidden" for the reverse behavior
-  // - BUT: until user scrolls, duration is 0 → no "load animation"
-  // - inView controls visibility; on initial load, inView elements will snap to show (duration 0)
   const effectiveDuration =
     prefersReducedMotion || !hasScrolled ? 0 : duration;
   const effectiveDelay = prefersReducedMotion || !hasScrolled ? 0 : delay;
@@ -236,9 +220,7 @@ export default function Services() {
   return (
     <main className="pb-20 pt-16">
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10 space-y-16">
-        {/* Kopfbereich – Back-Button + Titel + Logo rechts */}
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,0.9fr)] items-start">
-          {/* Link + Titel + Intro links */}
           <div className="space-y-6 max-w-3xl">
             <Reveal duration={0.55} y={12}>
               <div>
@@ -297,7 +279,6 @@ export default function Services() {
             </Reveal>
           </div>
 
-          {/* Logo rechts – auf Höhe der Headline */}
           <Reveal direction="left" duration={0.62} x={12} delay={0.02}>
             <div className="flex justify-start lg:justify-end">
               <div className="relative w-[240px] h-[100px] mt-2">
@@ -312,11 +293,9 @@ export default function Services() {
           </Reveal>
         </section>
 
-        {/* RETAINER-MODELL */}
         <section id="retainer" className="space-y-6">
           <Reveal duration={0.62} y={14}>
             <div className="rounded-3xl border border-[var(--border)] bg-[var(--surface)]/90 p-5 sm:p-6 lg:p-7 grid gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] items-start">
-              {/* Textseite */}
               <div className="space-y-4">
                 <Reveal duration={0.58} y={12}>
                   <div className="space-y-1.5">
@@ -340,7 +319,6 @@ export default function Services() {
                       und Entscheidungsreife).
                     </p>
 
-                    {/* Timeline */}
                     <div className="pt-2">
                       <div className="relative w-full">
                         <Reveal duration={0.88} y={10} delay={0.03} amount={0.2}>
@@ -430,18 +408,17 @@ export default function Services() {
                 </Reveal>
               </div>
 
-              {/* Honorar + Abschlussstrecke */}
               <Reveal direction="left" duration={0.62} x={12}>
                 <div className="space-y-4 rounded-2xl border border-[var(--border)] bg-[var(--bg)]/80 p-4 sm:p-5 lg:self-center">
                   <div className="space-y-1.5">
                     <p className="text-[11px] uppercase tracking-wide text-[var(--muted)]">
-                      Honorar
+                      Begleitung
                     </p>
                     <p className="text-sm sm:text-[15px] font-semibold text-white">
-                      ab 3.000 € / Monat
+                      Monatlich kündbar, Laufzeit projektbezogen.
                     </p>
                     <p className="text-xs sm:text-sm text-[var(--muted)]">
-                      Monatlich kündbar, Laufzeit projektbezogen.
+                      Umfang und Ausgestaltung werden projektbezogen transparent festgelegt.
                     </p>
                   </div>
 
@@ -460,7 +437,6 @@ export default function Services() {
           </Reveal>
         </section>
 
-        {/* PROJEKTENTWICKLER & BAUTRÄGER */}
         <section id="projektentwickler" className="space-y-8">
           <Reveal duration={0.58} y={12}>
             <div className="flex items-start gap-3">
@@ -534,21 +510,19 @@ export default function Services() {
               </div>
             </Reveal>
 
-           {/* Bild rechts */}
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 min-h-[260px] lg:min-h-0">
-            <Reveal direction="left" duration={0.62} x={12} className="h-full w-full">
-              <div className="relative h-full w-full min-h-[260px] lg:min-h-0">
-                <Image
-                  src="/pe-bt.jpg"
-                  alt="Projektentwicklung – Struktur und Komplexität"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 420px, 100vw"
-                />
-              </div>
-            </Reveal>
-          </div>
-
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 min-h-[260px] lg:min-h-0">
+              <Reveal direction="left" duration={0.62} x={12} className="h-full w-full">
+                <div className="relative h-full w-full min-h-[260px] lg:min-h-0">
+                  <Image
+                    src="/pe-bt.jpg"
+                    alt="Projektentwicklung – Struktur und Komplexität"
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 420px, 100vw"
+                  />
+                </div>
+              </Reveal>
+            </div>
           </div>
 
           <Reveal duration={0.62} y={14}>
@@ -582,17 +556,7 @@ export default function Services() {
                         </p>
                       </div>
 
-                      <div className="sm:text-right flex flex-col justify-between pt-1 sm:pt-0 min-w-[125px]">
-                        {row.honorar && (
-                          <div className="mb-2">
-                            <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
-                              Honorarrahmen
-                            </p>
-                            <p className="text-xs sm:text-sm font-semibold text-white">
-                              {row.honorar}
-                            </p>
-                          </div>
-                        )}
+                      <div className="sm:text-right flex flex-col justify-center pt-1 sm:pt-0 min-w-[125px]">
                         <Link
                           href={`/anfrage?leistung=${encodeURIComponent(
                             row.anchorId
@@ -611,7 +575,6 @@ export default function Services() {
           </Reveal>
         </section>
 
-        {/* UNTERNEHMER & KMU */}
         <section id="unternehmen" className="space-y-8">
           <Reveal duration={0.58} y={12}>
             <div className="flex items-start gap-3">
@@ -673,20 +636,19 @@ export default function Services() {
               </div>
             </Reveal>
 
-           {/* Bild rechts */}
-              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 min-h-[260px] lg:min-h-0">
-                <Reveal direction="left" duration={0.62} x={12} className="h-full w-full">
-                  <div className="relative h-full w-full min-h-[260px] lg:min-h-0">
-                    <Image
-                      src="/kmu.jpg"
-                      alt="Unternehmen – Klarheit und Struktur"
-                      fill
-                      className="object-cover object-[45%_75%]"
-                      sizes="(min-width: 1024px) 420px, 100vw"
-                    />
-                  </div>
-                </Reveal>
-              </div>
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 min-h-[260px] lg:min-h-0">
+              <Reveal direction="left" duration={0.62} x={12} className="h-full w-full">
+                <div className="relative h-full w-full min-h-[260px] lg:min-h-0">
+                  <Image
+                    src="/kmu.jpg"
+                    alt="Unternehmen – Klarheit und Struktur"
+                    fill
+                    className="object-cover object-[45%_75%]"
+                    sizes="(min-width: 1024px) 420px, 100vw"
+                  />
+                </div>
+              </Reveal>
+            </div>
           </div>
 
           <Reveal duration={0.62} y={14}>
@@ -720,17 +682,7 @@ export default function Services() {
                         </p>
                       </div>
 
-                      <div className="sm:text-right flex flex-col justify-between pt-1 sm:pt-0 min-w-[125px]">
-                        {row.honorar && (
-                          <div className="mb-2">
-                            <p className="text-[10px] uppercase tracking-wide text-[var(--muted)]">
-                              Honorarrahmen
-                            </p>
-                            <p className="text-xs sm:text-sm font-semibold text-white">
-                              {row.honorar}
-                            </p>
-                          </div>
-                        )}
+                      <div className="sm:text-right flex flex-col justify-center pt-1 sm:pt-0 min-w-[125px]">
                         <Link
                           href={`/anfrage?leistung=${encodeURIComponent(
                             row.anchorId
@@ -752,9 +704,8 @@ export default function Services() {
             <div className="max-w-4xl text-sm sm:text-[15px] text-[var(--muted)] pt-4 border-t border-white/8 leading-relaxed">
               <p>
                 Die Module sind einzeln beauftragbar. Der größte Mehrwert entsteht
-                durch die kombinierte und dauerhafte Nutzung. Alle Preise sind
-                netto angegeben und stellen Untergrenzen dar. Das Honorar wird
-                projektabhängig transparent festgelegt. Diskretion ist
+                durch die kombinierte und dauerhafte Nutzung. Umfang und Honorar
+                werden projektabhängig transparent festgelegt. Diskretion ist
                 selbstverständlich. Docalyze übernimmt ausschließlich klar
                 strukturierte und realistisch umsetzbare Mandate.
               </p>
